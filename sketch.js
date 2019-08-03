@@ -25,10 +25,10 @@ let ship = {
 }
 
 function preload() {
-    tenPointInvader = loadImage('assets/10PointInvader.png');
-    twentyPointInvader = loadImage('assets/20PointInvader.png');
-    fortyPointInvader = loadImage('assets/40PointInvader.png');
-    bossInvader = loadImage('assets/Boss.png');
+    tenPointInvader = loadImage('assets/10PointInvader.PNG');
+    twentyPointInvader = loadImage('assets/20PointInvader.PNG');
+    fortyPointInvader = loadImage('assets/40PointInvader.PNG');
+    bossInvader = loadImage('assets/Boss.PNG');
     logo = loadImage('assets/spaceInvadersLogo.png');
     myFont = loadFont('assets/space_invaders.ttf');
     shipImage = loadImage('assets/ship.png');
@@ -107,8 +107,8 @@ function draw() {
         fill('white');
         text('Lives: ', 650, 80);
         text(`Score: ${player.score}`, 25, 80)
-        for(let i = 0; i < player.lives; i++){
-        image(shipImage, 775 + (75 * i), 50);
+        for (let i = 0; i < player.lives; i++) {
+            image(shipImage, 775 + (75 * i), 50);
         }
         if (objArray.length == 0) currentScreen = 'Game Over';
         for (let i = 0; i < objArray.length; i++) {
@@ -131,11 +131,12 @@ function draw() {
         if (keyIsDown(LEFT_ARROW) && ship.x > 0) ship.x -= 3;
         else if (keyIsDown(RIGHT_ARROW) && ship.x < width - 50) ship.x += 3;
         if (keyIsDown(32)) {
-            for(let i=0; i < 600; i++){
-            rect(bulletX -1, bulletY - 10 - i, 2, 10);
+            for (let i = 0; i < 600; i++) {
+                fill("red");
+                rect(bulletX - 1, bulletY - 10 - i, 2, 10);
             }
         }
-        
+
         image(shipImage, ship.x, ship.y);
     } else if (currentScreen == 'Game Over') {
         background('black');
@@ -156,8 +157,8 @@ function draw() {
         fill('white');
         text('Lives: ', 650, 80);
         text(`Score: ${player.score}`, 25, 80)
-        for(let i = 0; i < player.lives; i++){
-        image(shipImage, 775 + (75 * i), 50);
+        for (let i = 0; i < player.lives; i++) {
+            image(shipImage, 775 + (75 * i), 50);
         }
         resetButton.elt.style.visibility = 'visible';
     }
@@ -188,41 +189,41 @@ function shoot() {
             break;
         }
     }
-     if (mainI == undefined) {
-         for (let i = bulletY; i > 0; i-=5) {
-             background('black');
-             tenPointInvader.resize(50, 0);
-             twentyPointInvader.resize(50, 0);
-             fortyPointInvader.resize(50, 0);
-             bossInvader.resize(50, 0);
-             if (objArray.length == 0) currentScreen = 'Game Over';
-             for (let i = 0; i < objArray.length; i++) {
-                 if (objArray[i].pointValue == 10) {
-                     image(tenPointInvader, objArray[i].x, objArray[i].y);
-                 } else if (objArray[i].pointValue == 20) {
-                     image(twentyPointInvader, objArray[i].x, objArray[i].y);
-                 } else if (objArray[i].pointValue == 40) {
-                     image(fortyPointInvader, objArray[i].x, objArray[i].y);
-                 } else if (objArray[i].pointValue == 100) {
-                     image(bossInvader, objArray[i].x, objArray[i].y);
-                 }
-             }
-             noStroke();
-             fill('white');
-             rect(bulletX, bulletY, 2, 10);
-         }
-     } else{
-         for (let i = bulletY; i > myAlien.y; i-=5) {
-                noStroke();
-                fill('white');
-                rect(bulletX, bulletY, 2, 10);
-         }
-         
-         objArray.splice(mainI,1);
-         if (objArray.length == 0) currentScreen = 'Game Over';
-         player.score += myAlien.pointValue;
-         
-     }
+    if (mainI == undefined) {
+        for (let i = bulletY; i > 0; i -= 5) {
+            background('black');
+            tenPointInvader.resize(50, 0);
+            twentyPointInvader.resize(50, 0);
+            fortyPointInvader.resize(50, 0);
+            bossInvader.resize(50, 0);
+            if (objArray.length == 0) currentScreen = 'Game Over';
+            for (let i = 0; i < objArray.length; i++) {
+                if (objArray[i].pointValue == 10) {
+                    image(tenPointInvader, objArray[i].x, objArray[i].y);
+                } else if (objArray[i].pointValue == 20) {
+                    image(twentyPointInvader, objArray[i].x, objArray[i].y);
+                } else if (objArray[i].pointValue == 40) {
+                    image(fortyPointInvader, objArray[i].x, objArray[i].y);
+                } else if (objArray[i].pointValue == 100) {
+                    image(bossInvader, objArray[i].x, objArray[i].y);
+                }
+            }
+            noStroke();
+            fill('white');
+            rect(bulletX, bulletY, 2, 10);
+        }
+    } else {
+        for (let i = bulletY; i > myAlien.y; i -= 5) {
+            noStroke();
+            fill('white');
+            rect(bulletX, bulletY, 2, 10);
+        }
+
+        objArray.splice(mainI, 1);
+        if (objArray.length == 0) currentScreen = 'Game Over';
+        player.score += myAlien.pointValue;
+
+    }
 }
 
 function reset() {
@@ -236,6 +237,7 @@ function reset() {
     for (let i = 0; i < 10; i++) {
         objArray.push({
             x: 50 * (1.5 * i + 1),
+            y: 150,
             y: 150,
             health: 100,
             pointValue: 10
